@@ -1409,6 +1409,8 @@ class State(object):
             return ret
 
         ret['__run_num__'] = self.__run_num
+        ret['sls'] = data['__sls__']
+        ret['env'] = data['__env__']
         self.__run_num += 1
         format_log(ret)
         self.check_refresh(low, ret)

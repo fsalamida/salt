@@ -1336,6 +1336,8 @@ class State(object):
         ret['__run_num__'] = self.__run_num
 	if '__sls__' in data:
 		ret['_sls'] = data['__sls__']
+	if '__env__' in data:
+		ret['_env'] = data['__env__']
         self.__run_num += 1
         format_log(ret)
         self.check_refresh(data, ret)

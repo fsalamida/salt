@@ -1336,7 +1336,7 @@ class State(object):
         ret['__run_num__'] = self.__run_num
 	log.debug('>>>> adding sls to ret')
 	if '__sls__' in data:
-		ret['_sls'] = data['__sls__']
+		ret['sls'] = data['__sls__']
         self.__run_num += 1
         format_log(ret)
         self.check_refresh(data, ret)

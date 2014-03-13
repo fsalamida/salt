@@ -618,7 +618,7 @@ class Minion(MinionBase):
                     continue
                 else:
                     proxyminion = salt.ProxyMinion()
-                    proxyminion.start(self.opts['pillar']['proxy'][p])
+                    proxyminion.start(dict([('id', p )] + self.opts['pillar']['proxy'][p].items()))
                     self.clean_die(signal.SIGTERM, None)
         else:
             log.debug('I am {0} and I am not supposed to start any proxies. '
@@ -1940,7 +1940,10 @@ class ProxyMinion(Minion):
         fq_proxyname = 'proxy.'+opts['proxy']['proxytype']
         self.proxymodule = salt.loader.proxy(opts, fq_proxyname)
         opts['proxyobject'] = self.proxymodule[opts['proxy']['proxytype']+'.Proxyconn'](opts['proxy'])
-        opts['id'] = opts['proxyobject'].id(opts)
+        if hasattr(opts['proxyobject'],'id'):
+            opts['id'] = opts['proxyobject'].id(opts)
+	else:
+            opts['id'] = opts['proxy']['id']
         opts.update(resolve_dns(opts))
         self.opts = opts
         self.authenticate(timeout, safe)

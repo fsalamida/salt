@@ -15,6 +15,7 @@ log = logging.getLogger(__name__)
 # Define the module's virtual name
 __virtualname__ = 'sys'
 
+__proxyenabled__ = ['pynet']
 
 def __virtual__():
     '''

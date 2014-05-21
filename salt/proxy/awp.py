@@ -26,4 +26,3 @@ class Proxyconn(object):
         Always up
         '''
         return True
-
